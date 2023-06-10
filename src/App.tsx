@@ -1,4 +1,8 @@
-const initialFriends = [
+import { useState } from 'react';
+import FriendsList from './components/FriendsList';
+import { IFriend } from './types/IFriend';
+
+const initialFriends: IFriend[] = [
   {
     id: 118836,
     name: 'Clark',
@@ -19,8 +23,18 @@ const initialFriends = [
   },
 ];
 
+console.log(initialFriends);
+
 function App() {
-  return <div>Hello</div>;
+  const [friends, setFriends] = useState<IFriend[]>(initialFriends);
+
+  return (
+    <div className="app">
+      <div className="sidebar">
+        <FriendsList friends={friends} />
+      </div>
+    </div>
+  );
 }
 
 export default App;
