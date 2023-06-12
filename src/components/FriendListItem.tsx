@@ -1,4 +1,5 @@
 import { IFriend } from '../types/IFriend';
+import Button from '../UI/Button';
 
 interface FriendListItemProps {
   friend: IFriend;
@@ -20,7 +21,7 @@ function FriendListItem({ friend }: FriendListItemProps) {
         </p>
       )}
       {friend.balance === 0 && <p>You and {friend.name} are even</p>}
-      <button className="button">Select</button>
+      <Button>Select</Button>
     </li>
   );
 }

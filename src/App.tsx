@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import FriendsList from './components/FriendsList';
 import { IFriend } from './types/IFriend';
+import FormAddFriend from './components/FormAddFriend';
+import Button from './UI/Button';
+import FormSplitBill from './components/FormSplitBill';
 
 const initialFriends: IFriend[] = [
   {
@@ -32,7 +35,10 @@ function App() {
     <div className="app">
       <div className="sidebar">
         <FriendsList friends={friends} />
+        <FormAddFriend />
+        <Button>Add friend</Button>
       </div>
+      <FormSplitBill />
     </div>
   );
 }
