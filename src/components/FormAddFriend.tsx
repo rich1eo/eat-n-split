@@ -8,7 +8,9 @@ interface FormAddFriendProps {
 
 function FormAddFriend({ onAddFriend }: FormAddFriendProps) {
   const [friendName, setFriendName] = useState<string>('');
-  const [friendImg, setFriendImg] = useState<string>('');
+  const [friendImg, setFriendImg] = useState<string>(
+    'https://i.pravatar.cc/48'
+  );
 
   function handleFriendNameChange(event: ChangeEvent<HTMLInputElement>) {
     setFriendName(event.target.value);

@@ -3,11 +3,23 @@ import Button from '../UI/Button';
 
 interface FriendListItemProps {
   friend: IFriend;
+  selectedFriend: IFriend | null;
+  onSelection(friend: IFriend): void;
 }
 
-function FriendListItem({ friend }: FriendListItemProps) {
+function FriendListItem({
+  friend,
+  selectedFriend,
+  onSelection,
+}: FriendListItemProps) {
+  const isSelected = selectedFriend?.id === friend.id;
+
+  function handleSelection() {
+    onSelection(friend);
+  }
+
   return (
-    <li>
+    <li className={isSelected ? 'selected' : ''}>
       <img src={friend.image} alt={friend.name} />
       <h3>{friend.name}</h3>
       {friend.balance < 0 && (
@@ -21,7 +33,9 @@ function FriendListItem({ friend }: FriendListItemProps) {
         </p>
       )}
       {friend.balance === 0 && <p>You and {friend.name} are even</p>}
-      <Button>Select</Button>
+      <Button onClick={handleSelection}>
+        {isSelected ? 'Close' : 'Select'}
+      </Button>
     </li>
   );
 }
