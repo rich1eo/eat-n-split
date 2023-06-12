@@ -29,14 +29,26 @@ const initialFriends: IFriend[] = [
 console.log(initialFriends);
 
 function App() {
+  const [showAddFriend, setShowAddFriend] = useState<boolean>(false);
   const [friends, setFriends] = useState<IFriend[]>(initialFriends);
+
+  function handleShowAddFriend() {
+    setShowAddFriend(showAddFriend => !showAddFriend);
+  }
+
+  function handleAddFriend(friend: IFriend) {
+    setFriends(friends => [...friends, friend]);
+    setShowAddFriend(false);
+  }
 
   return (
     <div className="app">
       <div className="sidebar">
         <FriendsList friends={friends} />
-        <FormAddFriend />
-        <Button>Add friend</Button>
+        {showAddFriend && <FormAddFriend onAddFriend={handleAddFriend} />}
+        <Button onClick={handleShowAddFriend}>
+          {showAddFriend ? 'Close' : 'Add friend'}
+        </Button>
       </div>
       <FormSplitBill />
     </div>
