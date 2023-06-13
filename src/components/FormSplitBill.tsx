@@ -1,12 +1,13 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import Button from '../UI/Button';
 import { IFriend } from '../types/IFriend';
 
 interface FormSplitBillProps {
   selectedFriend: IFriend;
+  onSplitBill(value: number): void;
 }
 
-function FormSplitBill({ selectedFriend }: FormSplitBillProps) {
+function FormSplitBill({ selectedFriend, onSplitBill }: FormSplitBillProps) {
   const [bill, setBill] = useState<number | string>('');
   const [userExpense, setUserExpense] = useState<number | string>('');
   const [whoIsPaying, setWhoIsPaying] = useState<string>('user');
@@ -31,8 +32,22 @@ function FormSplitBill({ selectedFriend }: FormSplitBillProps) {
     setWhoIsPaying(event.target.value);
   }
 
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (
+      typeof bill !== 'number' ||
+      typeof userExpense !== 'number' ||
+      typeof friendExpense !== 'number'
+    ) {
+      return;
+    } else {
+      onSplitBill(whoIsPaying === 'user' ? friendExpense : -userExpense);
+    }
+  }
+
   return (
-    <form className="form-split-bill">
+    <form className="form-split-bill" onSubmit={handleSubmit}>
       <h2>Split a bill with {selectedFriend.name}</h2>
 
       <label htmlFor="bill">💰 Bill value</label>
