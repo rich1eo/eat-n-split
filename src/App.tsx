@@ -75,6 +75,7 @@ function App() {
       </div>
       {selectedFriend && (
         <FormSplitBill
+          key={selectedFriend.id}
           selectedFriend={selectedFriend}
           onSplitBill={handleSplitBill}
         />
